@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos | Sierras Doradas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* Estilos generales */
+    :root {
+      --primary-color: #363332;
+      --secondary-color: #F4B92A;
+      --light-color: #C0C0C0;
+      --dark-color: #000;
+      --accent-color: #E9C666;
+      --white-color: #ffffff;
+      --gray-light: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23333"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="%23444" stroke-width="1"/></svg>') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--primary-color);
+      overflow-x: hidden;
+      padding-top: 80px;
+      min-height: 100vh;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    /* Header elegante */
+    header {
+      background-color: rgba(54, 51, 50, 0.98);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 12px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-brand {
+      color: var(--white-color) !important;
+      font-weight: 700;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateY(-2px);
+    }
+
+    .navbar-nav {
+      display: flex;
+      flex-direction: row !important;
+      gap: 8px;
+    }
+
+    .nav-link {
+      color: var(--white-color) !important;
+      font-weight: 500;
+      padding: 10px 20px !important;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--secondary-color);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::before {
+      width: 80%;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary-color) !important;
+      background-color: rgba(255,255,255,0.05);
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active {
+      color: var(--secondary-color) !important;
+      background-color: rgba(244, 185, 42, 0.1);
+    }
+
+    .nav-link.active::before {
+      width: 80%;
+    }
+
+    /* Contenido principal mejorado y CENTRADO */
+    .contenido-proyectos {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
+      min-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centrado vertical */
+      margin: 0;
+    }
+
+    .contenido-proyectos .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+    }
+
+    .texto-proyecto {
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+      text-align: center; /* Centrado del texto */
+    }
+
+    .texto-proyecto::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    }
+
+    /* Texto centrado */
+    .texto-proyecto p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: #444;
+      text-align: center; /* Texto centrado */
+      font-weight: 300;
+      position: relative;
+      padding: 0 20px;
+      transition: all 0.3s ease;
+    }
+
+    .texto-proyecto p:hover {
+      transform: translateY(-2px);
+    }
+
+    .texto-proyecto strong {
+      color: var(--primary-color);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      position: relative;
+      text-align: center; /* Títulos centrados */
+    }
+
+    .texto-proyecto strong::before {
+      content: '⚒';
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+
+    /* Botón Ver Más mejorado y CENTRADO */
+    .btn-ver-mas {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+      color: #000;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 15px rgba(244, 185, 42, 0.3);
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-ver-mas::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-ver-mas:hover::before {
+      left: 100%;
+    }
+
+    .btn-ver-mas:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(244, 185, 42, 0.4);
+    }
+
+    /* Contenedor del botón centrado */
+    .boton-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 2rem;
+    }
+
+    /* Footer elegante */
+    .footer {
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+      color: var(--secondary-color);
+      padding: 40px 20px;
+      text-align: center;
+      margin: 0;
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    }
+
+    .iconos-sociales {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .iconos-sociales i {
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(244, 185, 42, 0.1);
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .iconos-sociales i:hover {
+      color: var(--accent-color);
+      transform: translateY(-3px) scale(1.1);
+      background: rgba(244, 185, 42, 0.2);
+      border-color: var(--secondary-color);
+      box-shadow: 0 5px 15px rgba(244, 185, 42, 0.3);
+    }
+
+    .footer p {
+      margin: 0 auto;
+      line-height: 1.8;
+      font-size: 1rem;
+      max-width: 600px;
+      text-align: center;
+      width: 100%;
+      color: rgba(255,255,255,0.8);
+      font-weight: 300;
+    }
+
+    .footer p:first-of-type {
+      font-weight: 500;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .texto-proyecto {
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .texto-proyecto p:nth-child(1) {
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    .texto-proyecto p:nth-child(2) {
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+
+    /* ========== RESPONSIVE ========== */
+
+    /* Tablets */
+    @media (max-width: 991px) {
+      .texto-proyecto {
+        padding: 40px 30px;
+        margin: 0 20px;
+      }
+      
+      .texto-proyecto p {
+        font-size: 1.1rem;
+        padding: 0 15px;
+      }
+      
+      .contenido-proyectos .container {
+        padding: 40px 0;
+      }
+    }
+
+    /* Móviles */
+    @media (max-width: 767px) {
+      body {
+        padding-top: 70px;
+      }
+      
+      .texto-proyecto {
+        padding: 30px 20px;
+        margin: 0 15px;
+        border-radius: 15px;
+      }
+      
+      .texto-proyecto p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      
+      .texto-proyecto strong {
+        font-size: 1.1rem;
+      }
+      
+      .btn-ver-mas {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+      
+      .iconos-sociales {
+        gap: 20px;
+      }
+      
+      .iconos-sociales i {
+        font-size: 1.3rem;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .footer {
+        padding: 30px 15px;
+      }
+    }
+
+    /* Móviles pequeños */
+    @media (max-width: 575px) {
+      .texto-proyecto {
+        padding: 25px 15px;
+        margin: 0 10px;
+      }
+      
+      .texto-proyecto p {
+        font-size: 0.95rem;
+        padding: 0 5px;
+      }
+      
+      .texto-proyecto strong {
+        font-size: 1rem;
+      }
+      
+      .btn-ver-mas {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+      }
+      
+      .iconos-sociales {
+        gap: 15px;
+      }
+      
+      .iconos-sociales i {
+        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .footer p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Mejoras de accesibilidad */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      .btn-ver-mas:hover,
+      .nav-link:hover,
+      .iconos-sociales i:hover,
+      .texto-proyecto p:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Mejorado -->
+  <header class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" fill="#F4B92A" stroke="#363332" stroke-width="2"/>
+          <path d="M30,40 L50,20 L70,40 L60,40 L60,70 L40,70 L40,40 Z" fill="#363332"/>
+          <text x="50" y="85" text-anchor="middle" font-family="Arial" font-size="10" fill="#363332">SD</text>
+        </svg>
+        <span class="brand-text ms-2">Sierras <span class="gold-text">Doradas</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="Home/proyectos.html">Proyectos</a></li>
+          <li class="nav-item"><a class="nav-link" href="Home/equipo.html">Equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Novedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="Home/empleo.html">Empleo</a></li>
+          <li class="nav-item"><a class="nav-link" href="Home/maquinaria.html">Maquinaria</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal Mejorado y CENTRADO -->
+  <main class="contenido-proyectos">
+    <div class="container py-5">
+      <div class="texto-proyecto mx-auto">
+        <p>
+          <strong>Galan Lithium Limited</strong> presentó su solicitud de adhesión al RIGI en octubre de 2024
+          para el proyecto de litio Hombre Muerto Oeste que tiene en Catamarca. La inversión estimada es de
+          US$228 millones y el objetivo es producir hasta 20.850 toneladas por año de carbonato de litio equivalente a partir de 2027.
+        </p>
+
+        <p>
+          <strong>Posco Argentina S.A.</strong>, subsidiaria de la coreana Posco Holdings, solicitó el 30 de octubre de 2024 su adhesión al RIGI
+          por el proyecto de litio Sal de Oro, ubicado en el Salar del Hombre Muerto, en las provincias de Salta y Catamarca.
+          La Etapa I prevé producir aproximadamente 25.000 toneladas de fosfato de litio por año y la Etapa II 23.000 toneladas
+          de carbonato de litio por año. Las inversiones en activos computables en los términos del RIGI superan los US$ 1000 millones.
+        </p>
+
+        <!-- Botón centrado -->
+        <div class="boton-container">
+          <button class="btn-ver-mas">
+            <i class="bi bi-arrow-right me-2"></i>Ver más proyectos
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Mejorado -->
+  <footer class="footer">
+    <div class="container">
+      <div class="iconos-sociales">
+        <i class="bi bi-instagram" aria-label="Instagram"></i>
+        <i class="bi bi-facebook" aria-label="Facebook"></i>
+        <i class="bi bi-twitter" aria-label="Twitter"></i>
+        <i class="bi bi-whatsapp" aria-label="WhatsApp"></i>
+      </div>
+      <p>Minería Sierras Doradas S.A.</p>
+      <p>Av. Libertador Gral. San Martín 1450, San Juan, Argentina<br>
+      +54 (264) 456-7890 | contacto@sierrasdoradas.com.ar</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Ocultar el header al hacer scroll
+    let prevScroll = window.pageYOffset;
+    window.onscroll = function() {
+      const currentScroll = window.pageYOffset;
+      const header = document.querySelector("header");
+      if (prevScroll > currentScroll) {
+        header.style.top = "0";
+      } else {
+        header.style.top = "-90px";
+      }
+      prevScroll = currentScroll;
+    };
+  </script>
+</body>
+</html>
